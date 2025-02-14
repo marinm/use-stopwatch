@@ -11,7 +11,7 @@ export function useConnection(): Connection {
 
     console.log("useConnection");
 
-    const connection: Connection = {
+    return {
         open({ onEvent }) {
             console.log("opening...");
             if (interval !== null) {
@@ -39,6 +39,4 @@ export function useConnection(): Connection {
             console.log("closed");
         },
     };
-
-    return connection;
 }
