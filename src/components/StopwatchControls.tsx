@@ -3,18 +3,18 @@ import { useStopwatch, Stopwatch } from "../hooks/useStopwatch";
 export function StopwatchControls() {
     const stopwatch: Stopwatch = useStopwatch();
 
-    function open() {
-        stopwatch.open({
-            onTick: () => console.log(`event ${Date.now()}`),
+    function start() {
+        stopwatch.start({
+            onTick: () => console.log(`tick ${Date.now()}`),
         });
     }
 
-    function close() {
-        stopwatch.close();
+    function tap() {
+        stopwatch.tap(`tap ${Date.now()}`);
     }
 
-    function immediately() {
-        stopwatch.immediately(`event ${Date.now()}`);
+    function stop() {
+        stopwatch.stop();
     }
 
     return (
@@ -25,9 +25,9 @@ export function StopwatchControls() {
                 width: "fit-content",
             }}
         >
-            <button onClick={open}>Open</button>
-            <button onClick={immediately}>Immediately</button>
-            <button onClick={close}>Close</button>
+            <button onClick={start}>Start</button>
+            <button onClick={tap}>Tap</button>
+            <button onClick={stop}>Stop</button>
         </div>
     );
 }

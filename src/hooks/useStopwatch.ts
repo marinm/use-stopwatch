@@ -1,9 +1,9 @@
 export type OnTick = () => void;
 
 export type Stopwatch = {
-    open: (options: { onTick: OnTick }) => void;
-    immediately: (message: string) => void;
-    close: () => void;
+    start: (options: { onTick: OnTick }) => void;
+    tap: (message: string) => void;
+    stop: () => void;
 };
 
 export function useStopwatch(): Stopwatch {
@@ -12,31 +12,31 @@ export function useStopwatch(): Stopwatch {
     console.log("useStopwatch");
 
     return {
-        open({ onTick }) {
-            console.log("opening...");
+        start({ onTick }) {
+            console.log("starting...");
             if (interval !== null) {
-                console.log("already open");
+                console.log("already started");
                 return;
             }
             interval = window.setInterval(onTick, 1000);
-            console.log("opened");
+            console.log("started");
         },
-        immediately(message: string) {
+        tap(message: string) {
             if (interval === null) {
-                console.log("not open");
+                console.log("not started");
                 return;
             }
             console.log(message);
         },
-        close() {
-            console.log("closing...");
+        stop() {
+            console.log("stopping...");
             if (interval === null) {
-                console.log("already closed");
+                console.log("already stopped");
                 return;
             }
             window.clearInterval(interval);
             interval = null;
-            console.log("closed");
+            console.log("stopped");
         },
     };
 }
