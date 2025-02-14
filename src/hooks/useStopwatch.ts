@@ -9,9 +9,13 @@ export type Stopwatch = {
     stop: () => void;
 };
 
+const TICK_INTERVAL = 100;
+
 export function useStopwatch(): Stopwatch {
     const intervalRef = useRef<null | number>(null);
     const [elapsed, setElapsed] = useState<number>(0);
+
+    console.log("useStopwatch");
 
     return {
         elapsed,
@@ -24,8 +28,8 @@ export function useStopwatch(): Stopwatch {
             setElapsed(0);
             intervalRef.current = window.setInterval(() => {
                 onTick();
-                setElapsed((e) => e + 1000);
-            }, 1000);
+                setElapsed((e) => e + TICK_INTERVAL);
+            }, TICK_INTERVAL);
             console.log(`new interval=${intervalRef.current}`);
             console.log("started");
         },

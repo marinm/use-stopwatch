@@ -28,7 +28,7 @@ export function StopwatchControls() {
             <button onClick={start}>Start</button>
             <button onClick={tap}>Tap</button>
             <button onClick={stop}>Stop</button>
-            {stopwatch.elapsed / 1000}
+            {stopwatch.elapsed / 1000.0}
         </div>
     );
 }
