@@ -17,9 +17,16 @@ export function StopwatchControls() {
         stopwatch.stop();
     }
 
+    const format = new Intl.NumberFormat("en-US", {
+        minimumIntegerDigits: 1,
+        minimumFractionDigits: 3,
+    });
+
     return (
         <div
             style={{
+                display: "flex",
+                gap: "1em",
                 border: "1px solid black",
                 padding: "1em",
                 width: "fit-content",
@@ -28,7 +35,14 @@ export function StopwatchControls() {
             <button onClick={start}>Start</button>
             <button onClick={tap}>Tap</button>
             <button onClick={stop}>Stop</button>
-            {stopwatch.elapsed / 1000.0}
+            <div
+                style={{
+                    textAlign: "right",
+                    width: "10ch",
+                }}
+            >
+                {format.format(stopwatch.elapsed / 1000.0)}
+            </div>
         </div>
     );
 }
