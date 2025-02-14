@@ -29,7 +29,7 @@ export function StopwatchControls() {
                 gap: "1em",
                 border: "1px solid black",
                 padding: "1em",
-                width: "fit-content",
+                width: "100%",
             }}
         >
             <button onClick={start}>Start</button>
