@@ -13,8 +13,6 @@ export function useStopwatch(): Stopwatch {
     const intervalRef = useRef<null | number>(null);
     const [elapsed, setElapsed] = useState<number>(0);
 
-    console.log(`useStopwatch interval=${intervalRef.current}`);
-
     return {
         elapsed,
         start({ onTick }) {
@@ -28,6 +26,7 @@ export function useStopwatch(): Stopwatch {
                 onTick();
                 setElapsed((e) => e + 1000);
             }, 1000);
+            console.log(`new interval=${intervalRef.current}`);
             console.log("started");
         },
         tap(message: string) {
@@ -45,6 +44,7 @@ export function useStopwatch(): Stopwatch {
             }
             window.clearInterval(intervalRef.current);
             intervalRef.current = null;
+            setElapsed(0);
             console.log("stopped");
         },
     };
