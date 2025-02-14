@@ -4,6 +4,7 @@ export type OnTick = () => void;
 
 export type Stopwatch = {
     elapsed: number;
+    isStarted: boolean;
     start: (options: { onTick: OnTick }) => void;
     tap: (message: string) => void;
     stop: () => void;
@@ -14,11 +15,13 @@ const TICK_INTERVAL = 100;
 export function useStopwatch(): Stopwatch {
     const intervalRef = useRef<null | number>(null);
     const [elapsed, setElapsed] = useState<number>(0);
+    const [isStarted, setIsStarted] = useState<boolean>(false);
 
     console.log("useStopwatch");
 
     return {
         elapsed,
+        isStarted,
         start({ onTick }) {
             console.log("starting...");
             if (intervalRef.current !== null) {
@@ -26,6 +29,7 @@ export function useStopwatch(): Stopwatch {
                 return;
             }
             setElapsed(0);
+            setIsStarted(true);
             intervalRef.current = window.setInterval(() => {
                 onTick();
                 setElapsed((e) => e + TICK_INTERVAL);
@@ -49,6 +53,7 @@ export function useStopwatch(): Stopwatch {
             window.clearInterval(intervalRef.current);
             intervalRef.current = null;
             setElapsed(0);
+            setIsStarted(false);
             console.log("stopped");
         },
     };

@@ -43,6 +43,7 @@ export function StopwatchControls() {
             >
                 {format.format(stopwatch.elapsed / 1000.0)}
             </div>
+            <div>{stopwatch.isStarted ? "started" : "stopped"}</div>
         </div>
     );
 }
