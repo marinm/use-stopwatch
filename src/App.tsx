@@ -1,8 +1,8 @@
 import "./App.css";
-import ConnectionControls from "./components/ConnectionControls";
+import { StopwatchControls } from "./components/StopwatchControls";
 
 function App() {
-    return <ConnectionControls />;
+    return <StopwatchControls />;
 }
 
 export default App;

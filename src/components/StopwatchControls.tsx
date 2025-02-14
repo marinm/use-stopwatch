@@ -1,20 +1,20 @@
-import { useConnection, Connection } from "../hooks/useConnection";
+import { useStopwatch, Stopwatch } from "../hooks/useStopwatch";
 
-export default function ConnectionControls() {
-    const connection: Connection = useConnection();
+export function StopwatchControls() {
+    const stopwatch: Stopwatch = useStopwatch();
 
     function open() {
-        connection.open({
-            onEvent: () => console.log(`event ${Date.now()}`),
+        stopwatch.open({
+            onTick: () => console.log(`event ${Date.now()}`),
         });
     }
 
     function close() {
-        connection.close();
+        stopwatch.close();
     }
 
     function immediately() {
-        connection.immediately(`event ${Date.now()}`);
+        stopwatch.immediately(`event ${Date.now()}`);
     }
 
     return (

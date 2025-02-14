@@ -1,24 +1,24 @@
-export type OnEvent = () => void;
+export type OnTick = () => void;
 
-export type Connection = {
-    open: (options: { onEvent: OnEvent }) => void;
+export type Stopwatch = {
+    open: (options: { onTick: OnTick }) => void;
     immediately: (message: string) => void;
     close: () => void;
 };
 
-export function useConnection(): Connection {
+export function useStopwatch(): Stopwatch {
     let interval: null | number = null;
 
-    console.log("useConnection");
+    console.log("useStopwatch");
 
     return {
-        open({ onEvent }) {
+        open({ onTick }) {
             console.log("opening...");
             if (interval !== null) {
                 console.log("already open");
                 return;
             }
-            interval = window.setInterval(onEvent, 1000);
+            interval = window.setInterval(onTick, 1000);
             console.log("opened");
         },
         immediately(message: string) {
